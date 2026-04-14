@@ -9,12 +9,17 @@
     <nav class="mb-3">
         <h2>Manajemen Gaji</h2>
         <a href="/" class="btn btn-dark">Dashboard</a>
-        <a href="/karyawan" class="btn btn-primary">Karyawan</a>
-        <a href="/gaji" class="btn btn-success">Gaji</a>
-        <a href="/laporan" class="btn btn-warning">Laporan</a>
+        <a href="/karyawan" class="btn btn-primary">Data Karyawan</a>
+        <a href="/gaji" class="btn btn-success">Data Gaji</a>
+        <a href="/laporan" class="btn btn-warning">Data Laporan</a>
     </nav>
     <hr>
     @yield('content')
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
 </div>
 </body>
 </html>

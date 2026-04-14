@@ -1,8 +1,16 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 <h4>Input Gaji</h4>
-
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <form action="{{ route('gaji.store') }}" method="POST">
 @csrf
 
@@ -17,5 +25,6 @@
 <input type="number" name="pinjaman" placeholder="Pinjaman" class="form-control mb-2">
 
 <button class="btn btn-success">Hitung & Simpan</button>
+
 </form>
 @endsection

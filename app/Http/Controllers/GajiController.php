@@ -23,9 +23,17 @@ class GajiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'karyawan_id' => 'required',
-            'lembur' => 'required|numeric',
-            'pinjaman' => 'required|numeric'
+            'karyawan_id' => 'required|exists:karyawans,id',
+            'lembur' => 'required|numeric|min:0',
+            'pinjaman' => 'required|numeric|min:0'
+        ], [
+            'karyawan_id.required' => 'Karyawan wajib dipilih!',
+            'karyawan_id.exists' => 'Karyawan tidak valid!',
+            'lembur.required' => 'Lembur wajib diisi!',
+            'lembur.numeric' => 'Lembur harus berupa angka!',
+            'lembur.min' => 'Lembur tidak boleh negatif!',
+            'pinjaman.required' => 'Pinjaman wajib diisi!',
+            'pinjaman.numeric' => 'Pinjaman'
         ]);
 
         $karyawan = Karyawan::find($request->karyawan_id);
@@ -49,6 +57,7 @@ class GajiController extends Controller
     public function destroy($id)
     {
         Gaji::destroy($id);
-        return redirect()->route('gaji.index');
+        return redirect()->route('gaji.index')
+            ->with('success', 'Data gaji berhasil dihapus');
     }
 }

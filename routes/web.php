@@ -11,12 +11,7 @@ Route::get('/', function () {
 });
 
 Route::resource('karyawan', KaryawanController::class);
-
-Route::get('gaji', [GajiController::class, 'index'])->name('gaji.index');
-Route::get('gaji/create', [GajiController::class, 'create'])->name('gaji.create');
-Route::post('gaji/store', [GajiController::class, 'store'])->name('gaji.store');
-Route::delete('gaji/{id}', [GajiController::class, 'destroy'])->name('gaji.destroy');
-
+Route::resource('gaji', GajiController::class);
 Route::get('laporan', [LaporanController::class, 'index']);
 Route::get('laporan/export', [LaporanController::class, 'export']);
 

@@ -24,6 +24,11 @@ class KaryawanController extends Controller
             'nama' => 'required',
             'jabatan' => 'required',
             'gaji_pokok' => 'required|numeric'
+        ], [
+            'nama.requred' => 'Nama wajib diisi!',
+            'jabatan.required' => 'Jabatan wajib diisi!',
+            'gaji_pokok.required' => 'Gaji pokok wajib diisi!',
+            'gaji_pokok.numeric' => 'Gaji pokok harus berupa angka!'
         ]);
 
         Karyawan::create($request->all());
@@ -48,6 +53,7 @@ class KaryawanController extends Controller
     public function destroy($id)
     {
         Karyawan::destroy($id);
-        return redirect()->route('karyawan.index');
+        return redirect()->route('karyawan.index')
+            ->with('success', 'Data berhasil ditambahkan');
     }
 }

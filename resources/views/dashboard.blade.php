@@ -2,7 +2,8 @@
 
 @section('content')
 <h4>Dashboard</h4>
-<a href="/karyawan" class="btn btn-primary">Data Karyawan</a>
-<a href="/gaji" class="btn btn-success">Data Gaji</a>
-<a href="/laporan" class="btn btn-warning">Laporan</a>
+<div class="card p-3">
+    <h5>Selamat Datang di Aplikasi Gaji</h5>
+    <p>Silakan pilih menu di atas</p>
+</div>
 @endsection
