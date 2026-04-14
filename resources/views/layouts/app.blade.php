@@ -78,6 +78,7 @@
     <a href="/karyawan">Karyawan</a>
     <a href="/gaji">Gaji</a>
     <a href="/laporan">Laporan</a>
+    
 </div>
 
 <!-- MAIN -->
@@ -86,6 +87,10 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-custom mb-3 p-2 rounded">
         <span>Dashboard</span>
+        <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button class="btn btn-danger btn-sm">Logout</button>
+        </form>
     </nav>
 
     <!-- NOTIF -->

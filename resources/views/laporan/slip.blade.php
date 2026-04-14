@@ -38,12 +38,6 @@
     }
     </style>
 
-    <div class="mb-3 text-center no-print">
-        <button onclick="window.print()" class="btn btn-primary">
-            Cetak Slip
-        </button>
-    </div>
-
 <div id="print-area">
     <!-- HEADER -->
     <div style="text-align:center; border-bottom:1px dashed #000; padding-bottom:10px;">
@@ -123,6 +117,12 @@
 
 </div>
 </div>
+</div>
+<br>
+<div class="mb-3 text-center no-print">
+    <button onclick="window.print()" class="btn btn-primary">
+        Cetak Slip
+    </button>
 </div>
 
 @endsection

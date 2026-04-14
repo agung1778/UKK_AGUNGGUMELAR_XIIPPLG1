@@ -12,7 +12,6 @@
     <input type="text" name="nama"
         class="form-control @error('nama') is-invalid @enderror"
         value="{{ old('nama') }}">
-
     @error('nama')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
