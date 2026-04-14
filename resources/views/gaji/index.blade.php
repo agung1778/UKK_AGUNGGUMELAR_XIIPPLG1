@@ -1,35 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-<h4>Data Gaji</h4>
+<div class="card p-3 shadow-sm">
+    <div class="d-flex justify-content-between mb-2">
+        <h5>Data Gaji</h5>
+        <a href="{{ route('gaji.create') }}" class="btn btn-success">+ Input</a>
+    </div>
+    <table class="table table-hover">
+      <tr>
+          <th>Nama</th>
+          <th>Gaji Pokok</th>
+          <th>Lembur</th>
+          <th>Potongan</th>
+          <th>Gaji Bersih</th>
+          <th>Aksi</th>
+      </tr>
 
-<a href="{{ route('gaji.create') }}" class="btn btn-primary mb-2">Input Gaji</a>
-
-<table class="table">
-<tr>
-    <th>Nama</th>
-    <th>Gaji Pokok</th>
-    <th>Lembur</th>
-    <th>Potongan</th>
-    <th>Gaji Bersih</th>
-    <th>Aksi</th>
-</tr>
-
-@foreach($gaji as $g)
-<tr>
-<td>{{ $g->karyawan->nama }}</td>
-<td>{{ $g->karyawan->gaji_pokok }}</td>
-<td>{{ $g->lembur }}</td>
-<td>{{ $g->total_potongan }}</td>
-<td>{{ $g->gaji_bersih }}</td>
-<td>
-<form action="{{ route('gaji.destroy',$g->id) }}" method="POST">
-@csrf
-@method('DELETE')
-<button class="btn btn-danger">Hapus</button>
-</form>
-</td>
-</tr>
-@endforeach
-</table>
+      @foreach($gaji as $g)
+        <tr>
+        <td>{{ $g->karyawan->nama }}</td>
+        <td>{{ $g->karyawan->gaji_pokok }}</td>
+        <td>{{ $g->lembur }}</td>
+        <td>{{ $g->total_potongan }}</td>
+        <td>{{ $g->gaji_bersih }}</td>
+        <td>
+          <a href="{{ route('gaji.edit',$k->id) }}" class="btn btn-warning btn-sm">Edit</a>
+          <a href="{{ route('gaji.slip',$g->id) }}" class="btn btn-info ">
+              Lihat Slip
+          </a>
+        </td>
+      </tr>
+      @endforeach
+    </table>
 @endsection
+

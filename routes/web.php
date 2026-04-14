@@ -14,7 +14,7 @@ Route::resource('karyawan', KaryawanController::class);
 Route::resource('gaji', GajiController::class);
 Route::get('laporan', [LaporanController::class, 'index']);
 Route::get('laporan/export', [LaporanController::class, 'export']);
-
+Route::get('gaji/slip/{id}', [GajiController::class, 'slip'])->name('gaji.slip');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

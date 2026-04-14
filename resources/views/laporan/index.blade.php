@@ -1,25 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<h4>Laporan Gaji</h4>
 
-<a href="/laporan/export" class="btn btn-danger mb-2">Export PDF</a>
+<div class="card p-3 shadow-sm">
+    <div class="d-flex justify-content-between mb-2">
+        <h5>Laporan</h5>
+        <a href="/laporan/export" class="btn btn-danger">Export PDF</a>
+    </div>
 
-<table class="table">
-<tr>
-    <th>Nama</th>
-    <th>Total</th>
-    <th>Potongan</th>
-    <th>Bersih</th>
-</tr>
+    <table class="table table-striped">
+        <tr>
+            <th>Nama</th>
+            <th>Gaji Bersih</th>
+        </tr>
 
-@foreach($gaji as $g)
-<tr>
-<td>{{ $g->karyawan->nama }}</td>
-<td>{{ $g->total_penghasilan }}</td>
-<td>{{ $g->total_potongan }}</td>
-<td>{{ $g->gaji_bersih }}</td>
-</tr>
-@endforeach
-</table>
+        @foreach($gaji as $g)
+        <tr>
+            <td>{{ $g->karyawan->nama }}</td>
+            <td>Rp {{ number_format($g->gaji_bersih) }}</td>
+        </tr>
+        @endforeach
+    </table>
+</div>
+
 @endsection
