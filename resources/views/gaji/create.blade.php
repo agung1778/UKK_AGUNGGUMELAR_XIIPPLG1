@@ -36,7 +36,7 @@
 </div>
 
 <div class="mb-3">
-    <label>Potongan</label>
+    <label>Pinjaman</label>
     <input type="number" name="pinjaman"
         class="form-control @error('pinjaman') is-invalid @enderror">
 
