@@ -1,23 +1,25 @@
 <?php
 
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\GajiController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin', function () {
-        return view('admin.dashboard');
-    });
-});
+Route::resource('karyawan', KaryawanController::class);
 
-Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/user', function () {
-        return view('user.dashboard');
-    });
-});
+Route::get('gaji', [GajiController::class, 'index'])->name('gaji.index');
+Route::get('gaji/create', [GajiController::class, 'create'])->name('gaji.create');
+Route::post('gaji/store', [GajiController::class, 'store'])->name('gaji.store');
+Route::delete('gaji/{id}', [GajiController::class, 'destroy'])->name('gaji.destroy');
+
+Route::get('laporan', [LaporanController::class, 'index']);
+Route::get('laporan/export', [LaporanController::class, 'export']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -30,4 +32,4 @@ Route::middleware('auth')->group(function () {
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
