@@ -5,6 +5,7 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,10 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
   Route::get('/laporan/export', [LaporanController::class, 'export'])->name('laporan.export');
 });
+Route::post('/verifikasi-captcha', [GajiController::class, 'verifikasiCaptcha']);
 
-// WAJIB untuk Breeze
-require __DIR__ . '/auth.php';
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
