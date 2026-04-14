@@ -1,154 +1,128 @@
 @extends('layouts.app')
 
 @section('content')
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Slip Gaji</title>
+
+<div class="d-flex justify-content-center">
+
+<div style="width: 400px; background:white; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); font-family:monospace;">
 
     <style>
+    @media print {
+
+        /* sembunyikan yang tidak perlu */
+        .no-print,
+        .sidebar,
+        .navbar {
+            display: none !important;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-        }
-
-        .container {
-            width: 700px;
-            margin: auto;
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        h3 {
-            text-align: center;
-            margin-bottom: 5px;
+        /* pusatkan slip */
+        body * {
+            visibility: hidden;
         }
 
-        .periode {
-            text-align: center;
-            font-size: 14px;
-            margin-bottom: 20px;
+        #print-area, #print-area * {
+            visibility: visible;
         }
 
-        .info {
-            margin-bottom: 20px;
-        }
-
-        .info table {
+        #print-area {
+            position: absolute;
+            left: 0;
+            top: 0;
             width: 100%;
         }
-
-        .info td {
-            padding: 5px;
-        }
-
-        .section {
-            margin-top: 15px;
-        }
-
-        .header-section {
-            background: #6c8f3e;
-            color: white;
-            padding: 5px;
-            font-weight: bold;
-        }
-
-        .box {
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-
-        .flex {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .col {
-            width: 48%;
-        }
-
-        .row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .total {
-            font-weight: bold;
-            border-top: 2px solid #000;
-            padding-top: 8px;
-            margin-top: 10px;
-        }
-
-        .gaji-bersih {
-            background: #6c8f3e;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-
+    }
     </style>
-</head>
-<body>
 
-<div class="container">
-    <h3>SLIP GAJI KARYAWAN</h3>
-    <div class="periode">
-        Periode: {{ date('d M Y') }}
-    </div>
-    <div class="info">
-        <table>
-            <tr>
-                <td width="120">Nama</td>
-                <td>: {{ $gaji->karyawan->nama }}</td>
-            </tr>
-            <tr>
-                <td>Jabatan</td>
-                <td>: {{ $gaji->karyawan->jabatan }}</td>
-            </tr>
-        </table>
+    <div class="mb-3 text-center no-print">
+        <button onclick="window.print()" class="btn btn-primary">
+            Cetak Slip
+        </button>
     </div>
 
-    <div class="flex">
-        <div class="col">
-            <div class="header-section">PENGHASILAN</div>
-            <div class="box">
-                <div class="row">
-                    <span>Gaji Pokok</span>
-                    <span>Rp {{ number_format($gaji->karyawan->gaji_pokok,0,',','.') }}</span>
-                </div>
-                <div class="row">
-                    <span>Lembur</span>
-                    <span>Rp {{ number_format($gaji->lembur,0,',','.') }}</span>
-                </div>
-                <div class="row total">
-                    <span>Total</span>
-                    <span>Rp {{ number_format($gaji->total_penghasilan,0,',','.') }}</span>
-                </div>
-            </div>
+<div id="print-area">
+    <!-- HEADER -->
+    <div style="text-align:center; border-bottom:1px dashed #000; padding-bottom:10px;">
+        <h5 style="margin:0;">SLIP GAJI</h5>
+        <small>{{ date('d M Y H:i') }}</small>
+    </div>
+
+    <!-- INFO -->
+    <div style="margin-top:10px; font-size:13px;">
+        <div class="d-flex justify-content-between">
+            <span>Nama</span>
+            <span>{{ $gaji->karyawan->nama }}</span>
         </div>
-        <div class="col">
-            <div class="header-section">POTONGAN</div>
-            <div class="box">
-                <div class="row">
-                    <span>Pinjaman</span>
-                    <span>Rp {{ number_format($gaji->pinjaman,0,',','.') }}</span>
-                </div>
-                <div class="row total">
-                    <span>Total</span>
-                    <span>Rp {{ number_format($gaji->total_potongan,0,',','.') }}</span>
-                </div>
-            </div>
+
+        <div class="d-flex justify-content-between">
+            <span>Jabatan</span>
+            <span>{{ $gaji->karyawan->jabatan }}</span>
         </div>
     </div>
-    <div class="gaji-bersih">
-        GAJI BERSIH: Rp {{ number_format($gaji->gaji_bersih,0,',','.') }}
+
+    <hr style="border-top:1px dashed #000;">
+
+    <!-- PENGHASILAN -->
+    <div style="font-size:13px;">
+        <strong>Penghasilan</strong>
+
+        <div class="d-flex justify-content-between">
+            <span>Gaji Pokok</span>
+            <span>{{ number_format($gaji->karyawan->gaji_pokok,0,',','.') }}</span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <span>Lembur</span>
+            <span>{{ number_format($gaji->lembur,0,',','.') }}</span>
+        </div>
+
+        <div class="d-flex justify-content-between" style="font-weight:bold;">
+            <span>Total</span>
+            <span>{{ number_format($gaji->total_penghasilan,0,',','.') }}</span>
+        </div>
     </div>
+
+    <hr style="border-top:1px dashed #000;">
+
+    <!-- POTONGAN -->
+    <div style="font-size:13px;">
+        <strong>Potongan</strong>
+
+        <div class="d-flex justify-content-between">
+            <span>Pinjaman</span>
+            <span>{{ number_format($gaji->pinjaman,0,',','.') }}</span>
+        </div>
+
+        <div class="d-flex justify-content-between" style="font-weight:bold;">
+            <span>Total</span>
+            <span>{{ number_format($gaji->total_potongan,0,',','.') }}</span>
+        </div>
+    </div>
+
+    <hr style="border-top:1px dashed #000;">
+
+    <!-- TOTAL -->
+    <div style="font-size:14px; font-weight:bold;">
+        <div class="d-flex justify-content-between">
+            <span>GAJI BERSIH</span>
+            <span>Rp {{ number_format($gaji->gaji_bersih,0,',','.') }}</span>
+        </div>
+    </div>
+
+    <hr style="border-top:1px dashed #000;">
+
+    <!-- FOOTER -->
+    <div style="text-align:center; font-size:12px;">
+        <p style="margin:0;">Terima kasih</p>
+        <p style="margin:0;">Slip ini sah tanpa tanda tangan</p>
+    </div>
+
 </div>
-</body>
-</html>
+</div>
+</div>
+
 @endsection

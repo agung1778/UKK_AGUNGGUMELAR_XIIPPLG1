@@ -8,19 +8,26 @@
         <a href="/laporan/export" class="btn btn-danger">Export PDF</a>
     </div>
 
-    <table class="table table-striped">
-        <tr>
-            <th>Nama</th>
-            <th>Gaji Bersih</th>
-        </tr>
+      <table class="table table-hover">
 
-        @foreach($gaji as $g)
-        <tr>
-            <td>{{ $g->karyawan->nama }}</td>
-            <td>Rp {{ number_format($g->gaji_bersih) }}</td>
-        </tr>
-        @endforeach
-    </table>
+      <thead>
+          <tr>
+              <th>Nama</th>
+              <th>Total</th>
+              <th>Potongan</th>
+              <th>Bersih</th>
+          </tr>
+      </thead>
+      <tbody>
+          @foreach($gaji as $g)
+          <tr>
+              <td>{{ $g->karyawan->nama }}</td>
+              <td>{{ $g->total_penghasilan }}</td>
+              <td>{{ $g->total_potongan }}</td>
+              <td>Rp {{ number_format($g->gaji_bersih) }}</td>
+          </tr>
+          @endforeach
+      </tbody>
+  </table>
 </div>
-
 @endsection

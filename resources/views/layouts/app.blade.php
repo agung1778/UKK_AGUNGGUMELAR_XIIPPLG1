@@ -86,7 +86,6 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-custom mb-3 p-2 rounded">
         <span>Dashboard</span>
-        <span>User</span>
     </nav>
 
     <!-- NOTIF -->

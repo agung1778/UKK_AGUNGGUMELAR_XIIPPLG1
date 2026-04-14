@@ -24,7 +24,7 @@
         <td>{{ $g->total_potongan }}</td>
         <td>{{ $g->gaji_bersih }}</td>
         <td>
-          <a href="{{ route('gaji.edit',$k->id) }}" class="btn btn-warning btn-sm">Edit</a>
+          <a href="{{ route('gaji.edit',$g->id) }}" class="btn btn-warning">Edit</a>
           <a href="{{ route('gaji.slip',$g->id) }}" class="btn btn-info ">
               Lihat Slip
           </a>
